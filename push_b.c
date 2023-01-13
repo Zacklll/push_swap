@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_sb.c                                          :+:      :+:    :+:   */
+/*   push_a.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zael-wad <zael-wad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 21:28:10 by zael-wad          #+#    #+#             */
-/*   Updated: 2023/01/12 17:29:47 by zael-wad         ###   ########.fr       */
+/*   Created: 2023/01/12 02:19:04 by zael-wad          #+#    #+#             */
+/*   Updated: 2023/01/12 20:30:28 by zael-wad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap_sb(t_vu *stack_b)
+void	push_b(t_vu **stack_a, t_vu **stack_b)
 {
-	int     tmp;
+	t_vu *head;
 
-	// if (!stack_b)
-	//     return (NULL);
-	// if (ft_lstsize(stack_b) < 2)
-	//     return (NULL);
-	tmp = stack_b->data;
-	stack_b->data = stack_b->next->data;
-	stack_b->next->data = tmp;
+	head = (*stack_a);
+	(*stack_a) = head->next;
+	ft_lstadd_front(stack_b, head);
 }

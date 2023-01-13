@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_sb.c                                          :+:      :+:    :+:   */
+/*   revers_rotate_rra.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zael-wad <zael-wad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 21:28:10 by zael-wad          #+#    #+#             */
-/*   Updated: 2023/01/12 17:29:47 by zael-wad         ###   ########.fr       */
+/*   Created: 2023/01/12 17:52:00 by zael-wad          #+#    #+#             */
+/*   Updated: 2023/01/12 20:42:47 by zael-wad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap_sb(t_vu *stack_b)
+void    revers_rotate_rra(t_vu   **stack_a)
 {
-	int     tmp;
-
-	// if (!stack_b)
-	//     return (NULL);
-	// if (ft_lstsize(stack_b) < 2)
-	//     return (NULL);
-	tmp = stack_b->data;
-	stack_b->data = stack_b->next->data;
-	stack_b->next->data = tmp;
+    t_vu *tmp;
+    t_vu *tmp2;
+    
+    tmp = (*stack_a);
+    tmp2 = tmp;
+    while (tmp2->next->next)
+        tmp2 = tmp2->next;
+    while (tmp->next)
+        tmp = tmp->next;
+    tmp2->next = NULL;
+    ft_lstadd_front(stack_a,tmp);
 }
+    
