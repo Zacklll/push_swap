@@ -6,7 +6,7 @@
 /*   By: zael-wad <zael-wad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 17:52:00 by zael-wad          #+#    #+#             */
-/*   Updated: 2023/01/12 20:42:47 by zael-wad         ###   ########.fr       */
+/*   Updated: 2023/01/12 21:37:04 by zael-wad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void    revers_rotate_rra(t_vu   **stack_a)
 {
     t_vu *tmp;
     t_vu *tmp2;
-    
+    if (!stack_a || ft_lstsize(*stack_a) < 2)
+        return;
     tmp = (*stack_a);
     tmp2 = tmp;
     while (tmp2->next->next)

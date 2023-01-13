@@ -6,21 +6,19 @@
 /*   By: zael-wad <zael-wad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 21:31:06 by zael-wad          #+#    #+#             */
-/*   Updated: 2023/01/12 17:29:44 by zael-wad         ###   ########.fr       */
+/*   Updated: 2023/01/14 00:40:08 by zael-wad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void    swap_sa(t_vu *stack_a)
+#include <stdio.h>
+void    swap_sa(t_vu **stack_a)
 {
-    int     tmp;
     
-    // if (!stack_a)
-    //     return (NULL);
-    // if (ft_lstsize(stack_a) < 2)
-    //     return (NULL);
-    tmp = stack_a->data;
-    stack_a->data = stack_a->next->data;
-    stack_a->next->data = tmp;
+   if (!stack_a || ft_lstsize(*stack_a) <= 1)
+	    return;
+        int x;
+        x = (*stack_a)->data;
+        (*stack_a)->data = (*stack_a)->next->data;
+        (*stack_a)->next->data = x;
 }

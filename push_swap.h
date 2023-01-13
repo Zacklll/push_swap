@@ -6,7 +6,7 @@
 /*   By: zael-wad <zael-wad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 14:10:06 by zael-wad          #+#    #+#             */
-/*   Updated: 2023/01/12 20:51:19 by zael-wad         ###   ########.fr       */
+/*   Updated: 2023/01/13 22:09:34 by zael-wad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ char	**ft_split(char const *st, char c);
 t_vu	*ft_lstnew(int a);
 void    push_a(t_vu **stack_a, t_vu **stack_b);
 int	    ft_lstsize(t_vu *lst);
-void    swap_sb(t_vu *satck_b);
+void    swap_sb(t_vu **satck_b);
 void	ft_lstadd_front(t_vu **lst, t_vu *new);
-void    swap_sa(t_vu *satck_a);
+void    swap_sa(t_vu **satck_a);
 void    push_b(t_vu **stack_a, t_vu **stack_b);
 void    rotate_a(t_vu   **stack_a);
 void    revers_rotate_rra(t_vu   **stack_a);

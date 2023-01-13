@@ -6,7 +6,7 @@
 /*   By: zael-wad <zael-wad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 20:43:18 by zael-wad          #+#    #+#             */
-/*   Updated: 2023/01/12 20:44:21 by zael-wad         ###   ########.fr       */
+/*   Updated: 2023/01/12 21:37:25 by zael-wad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void    revers_rotate_rrb(t_vu   **stack_b)
 {
     t_vu *tmp;
     t_vu *tmp2;
-    
+    if (!stack_b || ft_lstsize(*stack_b) < 2)
+        return;
     tmp = (*stack_b);
     tmp2 = tmp;
     while (tmp2->next->next)
