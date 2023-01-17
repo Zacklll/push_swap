@@ -6,20 +6,24 @@
 /*   By: zael-wad <zael-wad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 14:10:06 by zael-wad          #+#    #+#             */
-/*   Updated: 2023/01/13 22:09:34 by zael-wad         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:23:50 by zael-wad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 #define PUSH_SWAP_H
 #include <stdlib.h>
+#include <stdio.h>
 
 typedef struct t_vu
 {
     int data;
     struct t_vu *next;
 }           t_vu;   
-
+int     max(t_vu *stack_a);
+int     min(t_vu *stack_a);
+int     find_min(t_vu	*stack_a);
+void    sort_five(t_vu **stack_a, t_vu **stack_b);
 void	ft_lstadd_back(t_vu **lst, t_vu *new);
 char	**ft_split(char const *st, char c);
 t_vu	*ft_lstnew(int a);
@@ -36,5 +40,7 @@ void    rotate_rr(t_vu  **stack_a, t_vu **stack_b);
 void	rotate_rb(t_vu **stack_b);
 void	rotate_ra(t_vu **stack_a);
 void    rotate_rrr(t_vu **stack_a, t_vu **stack_b);
+void    sort_3numb(t_vu **stack_a);
+int max(t_vu *stack_a);
 
 #endif

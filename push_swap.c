@@ -6,7 +6,7 @@
 /*   By: zael-wad <zael-wad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 14:13:20 by zael-wad          #+#    #+#             */
-/*   Updated: 2023/01/14 00:43:54 by zael-wad         ###   ########.fr       */
+/*   Updated: 2023/01/17 20:49:26 by zael-wad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,70 @@ int max(t_vu *stack_a)
 	c = k->data;
 	while (k->next)
 	{
-		if (c < k->data)
-			c = k->data;
+		if (c < k->next->data)
+			c = k->next->data;
 		k = k->next;
 	}
 	return c;
 }
+int		min_index(t_vu *stack_a)
+{
+	int i;
+
+	i = 0;
+	while (stack_a->next)
+	{
+		if (stack_a->data == min(stack_a))
+			return (i);
+		i++;
+		stack_a = stack_a->next;
+	}
+	return (0);
+}
+
+int min(t_vu *stack_a)
+{
+	t_vu *k;
+	k = stack_a;
+	int c;
+
+	c = k->data;
+	while (k->next)
+	{
+		if (c > k->next->data)
+			c = k->next->data;
+		k = k->next;
+	}
+	return c;
+}
+
+int find_min(t_vu	*stack_a)
+{
+	int i;
+	
+	i = 0;
+	while ((stack_a))
+	{
+		if ((stack_a)->data == min(stack_a))
+		{
+			if (i <= ft_lstsize(stack_a) / 2)
+				return (-1);
+			else if (i > ft_lstsize(stack_a) / 2)
+				return (1);
+		}
+		i++;
+		 (stack_a) = (stack_a)->next;
+	}
+	return 1;
+}
+
 int	main(int ac, char *av[])
 {
 	(void)ac;
 	t_vu *stack_a;
-	// t_vu *stack_b;
+	t_vu *stack_b;
 
+	
 	int i, j;
 	i = 1;
 	char **tmp;
@@ -48,40 +100,26 @@ int	main(int ac, char *av[])
 		}
 		i++;
 	}
-	// push_a(&stack_a, &stack_b);
-		t_vu *k = stack_a;
-		
+	// t_vu *pt = stack_a;
+	if (ft_lstsize(stack_a) == 3)
+		sort_3numb(&stack_a);
+	else if (ft_lstsize(stack_a) == 5)
+		sort_five(&stack_a,&stack_b);
+		printf("\netst   : %d", min_index(stack_a));
+
 	
-		if (k->data == max(stack_a))
-		{
-			rotate_ra(&stack_a);
-			if(stack_a->data > stack_a->next->data)
-			{
-				
-				swap_sa(&stack_a);
-				
-			}
-		}
-		// else if (k->data > k->next->data && k->next->data > k->next->next->data)
-		// {
-		// 	swap_sa(&stack_a);
-		// 	revers_rotate_rra(&stack_a);
-		// }
-		// else if (k->data > k->next->data && k->next->data < k->next->next->data)
-		// 	rotate_ra(&stack_a);
-		// else if (k->data < k->next->data && k->next->data < k->next->next->data)
-		// {
-		// 	swap_sa(&stack_a);
-		// 	rotate_ra(&stack_a);
-		// }
-		// else if (k->data > k->next->data && k->next->data < k->next->next->data && k->data > k->next->next->data)
-		// {
-		// 	revers_rotate_rra(&stack_a);
-		// }
+		
 	t_vu *p = stack_a;
-	while (p)
-	{
-		printf("%d \n ", p->data);
-		p = p->next;
-	}
+	// t_vu *p1 = stack_b;
+		
+		while (p)
+		{
+			printf(" %d\n ", p->data);
+			p = p->next;
+		}
+		// while (p1)
+		// {
+		// 	printf(" %d\n ", p1->data);
+		// 	p1 = p1->next;
+		// }
 }

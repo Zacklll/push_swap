@@ -105,22 +105,22 @@ char	**cpy(char const *st, char **str, char c)
 char	**ft_split(char const *st, char c)
 {
 	char	**str;
-	int		k;
+	// int		k;
 
-	k = 0;
+	// k = 0;
 	str = NULL;
 	if (!st)
 		return (0);
 	str = sto(st, str, c);
-	if (!str)
-	{
-		while (str[k] >= 0)
-		{
-			free(str[k]);
-			k--;
-		}
-		free(str);
-	}
+	// if (!str)
+	// {
+	// 	while (str[k] >= 0)
+	// 	{
+	// 		free(str[k]);
+	// 		k--;
+	// 	}
+	// 	free(str);
+	// }
 	str = cpy(st, str, c);
 	return (str);
 }
