@@ -19,6 +19,7 @@ void	loop_ra(t_vu **stack_a, t_vu **stack_b)
 	push_b(stack_a, stack_b);
 	printf("ra\npb\n");
 }
+
 void	loop_rra(t_vu **stack_a, t_vu **stack_b)
 {
 	while ((*stack_a)->data != min(*stack_a))
