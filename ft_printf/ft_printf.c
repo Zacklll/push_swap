@@ -1,30 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zael-wad <zael-wad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/30 20:34:15 by zael-wad          #+#    #+#             */
-/*   Updated: 2023/01/12 17:50:24 by zael-wad         ###   ########.fr       */
+/*   Created: 2022/11/03 13:09:06 by zael-wad          #+#    #+#             */
+/*   Updated: 2022/12/22 02:22:06 by zael-wad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "ft_printf.h"
+#include <stdarg.h>
+#include <stdio.h>
+#include <unistd.h>
 
-void	ft_lstadd_back(t_vu **lst, t_vu *new)
+int	ft_printf(const char *str, ...)
 {
-	t_vu	*p;
+	int		i;
+	va_list	args;
+	int		count;
 
-	if (new == NULL)
-		return ;
-	if (lst == NULL || *lst == NULL)
+	count = 0;
+	i = 0;
+	va_start(args, str);
+	while (str[i])
 	{
-		*lst = new;
-		return ;
+		if (str[i] == '%' && str[i + 1])
+		{
+			i++;
+			count += ft_check(args, str[i]);
+		}
+		else if (str[i] != '%' && str[i])
+		{
+			ft_putchar(str[i]);
+			count++;
+		}
+		i++;
 	}
-	p = *lst;
-	while (p->next)
-		p = p->next;
-	p->next = new;
+	va_end(args);
+	return (count);
 }
