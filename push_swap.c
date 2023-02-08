@@ -6,7 +6,7 @@
 /*   By: zael-wad <zael-wad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 14:13:20 by zael-wad          #+#    #+#             */
-/*   Updated: 2023/02/01 06:53:48 by zael-wad         ###   ########.fr       */
+/*   Updated: 2023/02/08 17:45:59 by zael-wad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	push_swap(t_vu **stack_a)
 			sort_high(stack_a, &stack_b);
 		push_back_a(stack_a, &stack_b);
 	}
-	ft_lstclear(*stack_a);
 }
 
 void	check_sing(char a, char b)
@@ -113,16 +112,13 @@ void	check_sing(char a, char b)
 			exit(0);
 		}
 	}
-	// if ()
-	// {
-	// 	printf("Error sing\n");
-	// 	exit (0);
-	// }
 }
 int	check_if_sorted(t_vu *stack_a)
 {
 	t_vu	*head;
 
+	if (!stack_a)
+		return (1);
 	head = stack_a;
 	while (head->next != NULL)
 	{
@@ -135,28 +131,40 @@ int	check_if_sorted(t_vu *stack_a)
 	return (1);
 }
 
-void	check_args(char **str)
+void	check_args(char *str)
 {
 	int	i;
-	int	j;
 
-	i = 0;
-	while (str[i])
+	if (str == NULL)
 	{
-		j = 0;
-		while (str[i][j])
-		{
-			if (str[i][j] == '-' || str[i][j] == '+')
-				j++;
-			while (str[i][j] < '0' && str[i][j] > '9')
-			{
-				printf("Error\n");
-				exit (0);
-			}
-			j++;
-		}
+		printf("Error\n");
+		exit(0);
+	}
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
 		i++;
 	}
+	if ((str[i] < '0' || str[i] > '9') && (str[i] != '\0'))
+	{
+		printf("Error \n");
+		exit(0);
+	}
+}
+
+void	ft_free_all(char **tmp)
+{
+	int	j;
+
+	j = 0;
+	while (tmp[j])
+	{
+		free(tmp[j]);
+		j++;
+	}
+	free(tmp);
 }
 
 int	main(int ac, char *av[])
@@ -167,31 +175,23 @@ int	main(int ac, char *av[])
 	t_vu	*stack_a;
 
 	i = 1;
-	if (ac > 2)
+	if (ac >= 2)
 	{
-		while (av[i])
+		while (i < ac)
 		{
 			j = 0;
 			tmp = ft_split(av[i], ' ');
-			check_args(tmp);
+			check_args(tmp[j]);
 			while (tmp[j])
 			{
-				ft_lstadd_back(&stack_a, ft_lstnew(atoi(tmp[j])));
+				check_args(tmp[j]);
+				ft_lstadd_back(&stack_a, ft_lstnew(ft_atoi(tmp[j])));
 				j++;
 			}
+			ft_free_all(tmp);
 			i++;
 		}
-		// j = 0;
-		// while (tmp[j])
-		// {
-		// 	free(tmp[j]);
-		// 	j++;
-		// }
-		// free(tmp);
 		if (check_if_sorted(stack_a) == -1)
 			push_swap(&stack_a);
-		// ft_lstclear(stack_a);
 	}
-	// while (1)
-	// {}
 }

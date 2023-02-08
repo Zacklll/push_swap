@@ -6,7 +6,7 @@
 /*   By: zael-wad <zael-wad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 21:35:43 by zael-wad          #+#    #+#             */
-/*   Updated: 2023/01/30 15:37:15 by zael-wad         ###   ########.fr       */
+/*   Updated: 2023/02/08 17:37:59 by zael-wad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	loop_stack_a(t_vu *stack_a, int *p)
 		}
 		stack_a = stack_a->next;
 	}
-	
 }
 
 int	sort_tab(t_vu *stack_a)
@@ -72,7 +71,7 @@ int	sort_tab(t_vu *stack_a)
 
 	t = stack_a;
 	i = 0;
-	p = malloc(sizeof(ft_lstsize(stack_a) * sizeof(int)));
+	p = malloc((ft_lstsize(stack_a) * sizeof(int)));
 	if (!p)
 		return (0);
 	while (t)

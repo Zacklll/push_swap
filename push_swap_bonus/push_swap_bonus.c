@@ -6,151 +6,129 @@
 /*   By: zael-wad <zael-wad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:24:11 by zael-wad          #+#    #+#             */
-/*   Updated: 2023/02/01 14:17:10 by zael-wad         ###   ########.fr       */
+/*   Updated: 2023/02/08 17:52:57 by zael-wad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_bonus.h"
 
-int	check(char *str)
+int	check_instruction(char *str)
 {
-	if (strcmp(str, "sa\n") == 0)
+	if (ft_strcmp(str, "sa\n") == 0)
 		return (1);
-	else if (strcmp(str, "sb\n") == 0)
+	else if (ft_strcmp(str, "sb\n") == 0)
 		return (1);
-	else if (strcmp(str, "ra\n") == 0)
+	else if (ft_strcmp(str, "ra\n") == 0)
 		return (1);
-	else if (strcmp(str, "rb\n") == 0)
+	else if (ft_strcmp(str, "rb\n") == 0)
 		return (1);
-	else if (strcmp(str, "rra\n") == 0)
-	 	return (1);
-	else if (strcmp(str, "rrb\n") == 0)
+	else if (ft_strcmp(str, "rra\n") == 0)
 		return (1);
-	else if (strcmp(str, "pa\n") == 0)
+	else if (ft_strcmp(str, "rrb\n") == 0)
 		return (1);
-	else if (strcmp(str, "pb\n") == 0)
+	else if (ft_strcmp(str, "pa\n") == 0)
+		return (1);
+	else if (ft_strcmp(str, "pb\n") == 0)
 		return (1);
 	return (0);
 }
-void	check_args(char **str)
+
+void	check_args(char *str)
 {
 	int	i;
-	int	j;
 
-	i = 0;
-	while (str[i])
+	if (str == NULL)
 	{
-		j = 0;
-		while (str[i][j])
-		{
-			if (str[i][j] == '-' || str[i][j] == '+')
-				j++;
-			while (str[i][j] < '0' && str[i][j] > '9')
-			{
-				printf("Error\n");
-				exit (0);
-			}
-			j++;
-		}
+		printf("Error\n");
+		exit(0);
+	}
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
 		i++;
 	}
-}
-void	fun(t_var **stack_a, t_var **stack_b, char *str)
-{
-	if (strcmp(str,"sa\n") == 0)
-        swap_sa(stack_a);
-    else if (strcmp(str,"sb\n") == 0)
-        swap_sb(stack_b);
-    else if (strcmp(str,"pa\n") == 0)
-        push_a(stack_a,stack_b);
-    else if (strcmp(str,"pb\n") == 0)
-        push_b(stack_a,stack_b);
-    else if (strcmp(str,"ra\n") == 0)
-        rotate_ra(stack_a);
-    else if (strcmp(str,"rb\n") == 0)
-        rotate_rb(stack_b);
-    else if (strcmp(str,"rra\n") == 0)
-        revers_rotate_rra(stack_a);
-    else if (strcmp(str,"rrb\n") == 0)
-        revers_rotate_rra(stack_b);
+	if ((str[i] < '0' || str[i] > '9') && (str[i] != '\0'))
+	{
+		printf("Error \n");
+		exit(0);
+	}
 }
 
-int	check_if_sorted(t_var *stack_a)
+void	call_instruction(t_var **stack_a, t_var **stack_b, char *str)
 {
-	t_var	*head;
-	if (!stack_a)
-		return 0;
-	head = stack_a;
-	while (head->next != NULL)
+	if (ft_strcmp(str, "sa\n") == 0)
+		swap_sa(stack_a);
+	else if (ft_strcmp(str, "sb\n") == 0)
+		swap_sb(stack_b);
+	else if (ft_strcmp(str, "pa\n") == 0)
+		push_a(stack_a, stack_b);
+	else if (ft_strcmp(str, "pb\n") == 0)
+		push_b(stack_a, stack_b);
+	else if (ft_strcmp(str, "ra\n") == 0)
+		rotate_ra(stack_a);
+	else if (ft_strcmp(str, "rb\n") == 0)
+		rotate_rb(stack_b);
+	else if (ft_strcmp(str, "rra\n") == 0)
+		revers_rotate_rra(stack_a);
+	else if (ft_strcmp(str, "rrb\n") == 0)
+		revers_rotate_rra(stack_b);
+}
+
+void	checker(t_var **stack_a)
+{
+	char	*tmp1;
+	t_var	*stack_b;
+	int		size;
+
+	check_rep(*stack_a);
+	size = ft_lstsize(*stack_a);
+	tmp1 = get_next_line(0);
+	while (tmp1)
 	{
-		if (head->data > head->next->data)
+		if (check_instruction(tmp1) == 0)
 		{
-			return (-1);
+			printf("Error\n");
+			exit(0);
 		}
-		head = head->next;
+		call_instruction(stack_a, &stack_b, tmp1);
+		free(tmp1);
+		tmp1 = get_next_line(0);
 	}
-	return (1);
+	if (check_if_sorted(*stack_a) == 1 && size == ft_lstsize(*stack_a))
+		printf("OK\n");
+	else
+	{
+		printf("KO\n");
+		exit(0);
+	}
 }
 
 int	main(int ac, char *av[])
 {
-	(void)ac;
-	char *tmp1 = NULL;
-	// char *save;
-	int i;
-	int j;
-	char **tmp;
-	t_var *stack_a;
-	t_var *stack_b;
+	int		i;
+	int		j;
+	char	**tmp;
+	t_var	*stack_a;
 
-	i = 1;
-	while (av[i])
+	if (ac != 1)
 	{
-		j = 0;
-		tmp = ft_split(av[i], ' ');
-		check_args(tmp);
-		while (tmp[j])
+		i = 1;
+		while (av[i])
 		{
-			
-			ft_lstadd_back(&stack_a, ft_lstnew(atoi(tmp[j])));
-			j++;
-		}
-		i++;
-	}
-	if (check_if_sorted(stack_a) != 1)
-	{
-		tmp1 = get_next_line(0);
-		while (tmp1)
-		{	
-			if (check(tmp1) == 0)
+			j = 0;
+			tmp = ft_split(av[i], ' ');
+			check_args(tmp[j]);
+			while (tmp[j])
 			{
-				printf("Error\n");
-				exit(0);
+				check_args(tmp[j]);
+				ft_lstadd_back(&stack_a, ft_lstnew(atoi(tmp[j])));
+				j++;
 			}
-			fun(&stack_a,&stack_b,tmp1);
-			free(tmp1);
-			tmp1 = get_next_line(0);
-			
-			// printf("%s\n",tmp1);
-			// free(tmp1);		
+			ft_free_all(tmp);
+			i++;
 		}
-	
-		if (check_if_sorted(stack_a) == 1)
-			printf("OK\n");
-		else
-		{
-			printf("KO\n");
-			exit(0);
-		}
+		checker(&stack_a);
 	}
-    
-    // else 
-    //     printf("ERROR\n");
-    //     exit(0);
-    // t_var *p = stack_a;
-	// while (p)
-	// {
-	//     printf("|| %d \n",p->data);
-	//     p = p->next;
-	// }
 }

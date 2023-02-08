@@ -6,10 +6,9 @@
 /*   By: zael-wad <zael-wad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 17:42:49 by zael-wad          #+#    #+#             */
-/*   Updated: 2023/01/30 22:02:02 by zael-wad         ###   ########.fr       */
+/*   Updated: 2023/02/08 14:38:09 by zael-wad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "push_swap.h"
 
@@ -17,7 +16,7 @@ void	rotate_ra(t_vu **stack_a)
 {
 	t_vu	*head;
 
-	if (!stack_a)
+	if (ft_lstsize(*stack_a) < 2)
 		return ;
 	head = (*stack_a);
 	(*stack_a) = head->next;

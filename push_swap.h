@@ -6,7 +6,7 @@
 /*   By: zael-wad <zael-wad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 14:10:06 by zael-wad          #+#    #+#             */
-/*   Updated: 2023/01/30 20:28:01 by zael-wad         ###   ########.fr       */
+/*   Updated: 2023/02/08 11:35:02 by zael-wad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int				ft_lstsize(t_vu *lst);
 int				sort_tab(t_vu *stack_a);
 int				find_max_index(t_vu *stack_b, int par);
 int				min(t_vu *stack_a);
+int				ft_atoi(const char *at);
 int				find_next_max_index(t_vu *stack_b, int par);
 int				max_value(t_vu *stack);
 
